@@ -8,12 +8,15 @@ ports:
 
 # List the start up tasks. You can start them in parallel in multiple terminals. See https://www.gitpod.io/docs/config-start-tasks/
 tasks:
-  - init: echo 'init script' # runs during prebuild
+  - init: 
+      echo 'init script'
       echo "Installing Firebase tools..."
       npm install -g firebase-tools
+      npm install eslint-plugin-promise@latest --save-dev
       echo "Getting dependencies..."
       npm install
-    command: echo 'start script'
+    command: 
+      echo 'start script'
       echo "Make sure we are using the latest versions of Firebase tools and libraries..."
       npm install firebase-functions@latest firebase-admin@latest --save
       npm install -g firebase-tools

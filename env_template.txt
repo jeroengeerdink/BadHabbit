@@ -1,0 +1,15 @@
+# Leave this the same for your development file, 
+# and change it to whichever URL you want users 
+# to access your site with in the production file
+REACT_APP_BASE_URL=localhost:3000
+
+# Found in project settings under the General tab
+REACT_APP_FIREBASE_PROJECT_ID=badhabbit-e03eb
+REACT_APP_FIREBASE_API_KEY=AIzaSyAAChOVppNuQXsP6PtbgoBbSPHhLUBsKmE
+
+# Found in project settings under the Cloud Messaging tab
+REACT_APP_FIREBASE_MESSAGING_CERT=BBHcWXwxRzRoeiMCnCm7McwONGe3FX_ryRrNl_2ei48eAOsxt0VKIa4GHyOWjsI62MjQ3uMvMVlbg9ofnXDQzHY
+REACT_APP_FIREBASE_MESSAGING_ID=973418557891
+
+# Found in the Hosting tab
+REACT_APP_FIREBASE_DOMAIN=badhabbit-e03eb.web.app

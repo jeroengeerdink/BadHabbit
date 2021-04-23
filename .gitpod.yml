@@ -1,23 +1,13 @@
 # Gitpod setup
 image:
   file: .gitpod.Dockerfile
-
-# List the ports you want to expose and what to do when they are served. See https://www.gitpod.io/docs/config-ports/
 ports:
   - port: 3000
     onOpen: open-preview
-
-# List the start up tasks. You can start them in parallel in multiple terminals. See https://www.gitpod.io/docs/config-start-tasks/
 tasks:
-  - init: 
-      echo 'init script'
-      echo "Getting dependencies..."
-      npm install
-    command: 
-      echo 'start script'
-      cd functions
-      echo "Make sure we are using the latest versions of Firebase tools and libraries..."
-      npm install firebase-functions@latest firebase-admin@latest --save
-      cd ..
-      echo "Logging in..."
-      firebase login:ci --no-localhost
+  - init: echo 'init script' echo "Getting dependencies..." & npm install
+    command: >-
+      echo 'start script' & cd functions  & echo "Make sure we are using the latest
+      versions of Firebase tools and libraries..." & npm install &
+      firebase-functions@latest firebase-admin@latest --save & cd .. & echo "Logging
+      in..." & firebase login:ci --no-localhost

@@ -14,7 +14,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "build:dev":"env-cmd -f .env.development npm run build && firebase deploy -P dev",
+    "build:dev": "env-cmd -f .env.development npm run build && firebase deploy -P dev",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "setup": "npm i && cd functions && npm i && cd .. && cp env_template.txt .env.production.local && cp env_template.txt .env.development.local"

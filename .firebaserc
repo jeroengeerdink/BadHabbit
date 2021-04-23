@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "badhabbit-e03eb"
+    "default": "badhabbit-e03eb",
+    "dev": "badhabbit-e03eb"
   }
 }

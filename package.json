@@ -14,6 +14,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:dev":"env-cmd -f .env.development npm run build && firebase deploy -P dev",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "setup": "npm i && cd functions && npm i && cd .. && cp env_template.txt .env.production.local && cp env_template.txt .env.development.local"
@@ -28,6 +29,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "env-cmd": "^10.1.0",
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-react-hooks": "0.0.0"
   }

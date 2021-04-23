@@ -11,9 +11,6 @@ ports:
 tasks:
   - init: 
       echo 'init script'
-      echo "Installing Firebase tools..."
-      npm install -g firebase-tools
-      npm install eslint-plugin-promise@latest --save-dev
       echo "Getting dependencies..."
       npm install
     command: 
@@ -21,7 +18,6 @@ tasks:
       cd functions
       echo "Make sure we are using the latest versions of Firebase tools and libraries..."
       npm install firebase-functions@latest firebase-admin@latest --save
-      npm install -g firebase-tools
       cd ..
       echo "Logging in..."
       firebase login:ci --no-localhost

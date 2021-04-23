@@ -15,4 +15,4 @@ tasks:
       & firebase-functions@latest firebase-admin@latest --save 
       & cd .. & echo "Logging in..."
   - command:
-      firebase login:ci --no-localhost
+      firebase login --no-localhost

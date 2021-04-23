@@ -8,11 +8,9 @@ tasks:
   - init: 
       echo 'init script' echo "Getting dependencies..." 
       & npm install
-      & echo 'start script'
-      & cd functions  
-      & echo "Make sure we are using the latest versions of Firebase tools and libraries..." 
+      & cd functions
       & npm install 
       & firebase-functions@latest firebase-admin@latest --save 
-      & cd .. & echo "Logging in..."
+      & cd ..
   - command:
       firebase login --no-localhost

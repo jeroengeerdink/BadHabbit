@@ -9,6 +9,7 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 import Lander from "./containers/Lander";
 import SignIn from "./containers/SignIn";
 import Dashboard from "./containers/Dashboard";
+import SessionFeedback from "./containers/SessionFeedback";
 import Confirmed from "./containers/Confirmed";
 import Profile from "./containers/Profile";
 import Header from "./containers/Header";
@@ -134,6 +135,10 @@ const MainRouter = () => {
                   <Route
                     path={"/dashboard"}
                     render={() => routeWithAuth(<Dashboard />)}
+                  />
+                  <Route
+                    path={"/sessionfeedback"}
+                    render={() => routeWithAuth(<SessionFeedback />)}
                   />
                   <Route
                     path={"/profile"}

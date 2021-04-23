@@ -5,9 +5,14 @@ ports:
   - port: 3000
     onOpen: open-preview
 tasks:
-  - init: echo 'init script' echo "Getting dependencies..." & npm install
-    command: >-
-      echo 'start script' & cd functions  & echo "Make sure we are using the latest
-      versions of Firebase tools and libraries..." & npm install &
-      firebase-functions@latest firebase-admin@latest --save & cd .. & echo "Logging
-      in..." & firebase login:ci --no-localhost
+  - init: 
+      echo 'init script' echo "Getting dependencies..." 
+      & npm install
+      & echo 'start script'
+      & cd functions  
+      & echo "Make sure we are using the latest versions of Firebase tools and libraries..." 
+      & npm install 
+      & firebase-functions@latest firebase-admin@latest --save 
+      & cd .. & echo "Logging in..."
+  - command:
+      firebase login:ci --no-localhost

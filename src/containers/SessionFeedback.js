@@ -8,7 +8,8 @@ import "firebase/firestore";
 const SessionFeedback = () => {
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
-  const [interruptions, addInterruption] = useState(null);
+  const [interruptions, setInterruptions] = useState(0);
+  const [rude, setRude] = useState(0);
   const [moreInfoComplete, setMoreInfoComplete] = useState(false);
   const { userState, userDispatch } = useContext(UserContext);
   const { sendMessage } = useContext(ToastContext);
@@ -76,35 +77,24 @@ const SessionFeedback = () => {
     }
   };
 
-  const moreInfo = () => {
-    return (
-      <BodyWrapper>
-        <H1>Please login first</H1>
-      </BodyWrapper>
-    );
-  };
-
-  const dashboard = () => {
+  const feedbackPanel = () => {
     return (
       <BodyWrapper>
         <H1>Session Feedback</H1>
         <P>
-        <Form>
           <div>
-          <Button onClick={e => onClickSubmit(e)}>Interrupt</Button>
-          <Button onClick={e => onClickSubmit(e)}>Rude</Button>
-          <Button onClick={e => onClickSubmit(e)}>Axcious</Button>
+          <Button onClick={() => setInterruptions(interruptions + 1)}>Interrupt {interruptions}</Button>
           </div>
-
-          <Button onClick={e => onClickSubmit(e)}>Submit</Button>
-        </Form>
+          <div>
+          <Button onClick={() => setRude(rude + 1)}>Rude {rude}</Button>
+          </div>
+          <div>
+          </div>
         </P>
       </BodyWrapper>
     );
   };
-  return moreInfoComplete || userState.userData.firstName
-    ? dashboard()
-    : moreInfo();
+  return feedbackPanel()
 };
 
 export default SessionFeedback;

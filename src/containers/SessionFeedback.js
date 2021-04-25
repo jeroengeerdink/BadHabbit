@@ -1,9 +1,29 @@
 import React, { useState, useContext, useEffect } from "react";
-import { P, H1, Button, Input, Form, BodyWrapper } from "../components";
+import IconButton from '@material-ui/core/IconButton';
+import { P, H1, Button, Input, Form, BodyWrapper, Icon } from "../components";
 import { UserContext } from "../contexts/userContext";
 import { ToastContext } from "../contexts/toastContext";
 import firebase from "../firebase.js";
+import { metrics, icons } from "../themes";
+import BlockIcon from '@material-ui/icons/Block';
+import AvTimerIcon from '@material-ui/icons/AvTimer';
+import Badge from '@material-ui/core/Badge';
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+
 import "firebase/firestore";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+}));
 
 const SessionFeedback = () => {
   const [firstName, setFirstName] = useState(null);
@@ -78,19 +98,46 @@ const SessionFeedback = () => {
   };
 
   const feedbackPanel = () => {
+    const classes = useStyles();
+
     return (
       <BodyWrapper>
         <H1>Session Feedback</H1>
+        <div className={classes.root}>
+        <Grid
+          container
+          direction="row"
+          justify="center"
+          alignItems="center"
+          spacing={3}>
         <P>
+        <Grid item xs={6}>
           <div>
-          <Button onClick={() => setInterruptions(interruptions + 1)}>Interrupt {interruptions}</Button>
+            <Badge badgeContent={interruptions} color="secondary">
+              <IconButton onClick={() => setInterruptions(interruptions + 1)}>
+                <BlockIcon style={{ fontSize: 200 }}/> 
+              </IconButton>
+            </Badge>
           </div>
+          </Grid>
+
+          <Grid item xs={6}>
           <div>
-          <Button onClick={() => setRude(rude + 1)}>Rude {rude}</Button>
+            <Badge badgeContent={rude} color="secondary">
+              <IconButton onClick={() => setRude(rude + 1)}>
+                <AvTimerIcon style={{ fontSize: 200 }}/>
+              </IconButton>
+            </Badge>
           </div>
+          </Grid>
+          <Grid item xs={12}>
           <div>
+            <Button onClick={() => setRude(rude + 1)}>Finish</Button>
           </div>
+          </Grid>
         </P>
+        </Grid>
+        </div>
       </BodyWrapper>
     );
   };

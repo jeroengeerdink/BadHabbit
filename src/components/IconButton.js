@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { metrics } from "../themes";
 import { Spinner } from ".";
 
-const IconButton = styled.button`
+const IconButton = styled.img`
   min-height: ${metrics.baseUnit * 4}px;
   width: ${metrics.baseUnit * 20}px;
   background-color: ${props => props.color || props.theme.primaryButton};
@@ -27,17 +27,8 @@ const IconButton = styled.button`
   }
 `;
 
-const ButtonWithLoadState = props => {
-  const loadState = () => {
-    if (props.loading) {
-      return <Spinner />;
-    } else {
-      return props.children;
-    }
-  };
   return (
     <IconButton disabled={props.loading} {...props}>
-      {loadState()}
     </IconButton>
   );
 };

@@ -1,14 +1,35 @@
 import React, { useState, useContext, useEffect } from "react";
-import { P, H1, Button, Input, Form, BodyWrapper } from "../components";
+import IconButton from '@material-ui/core/IconButton';
+import { P, H1, Button, Input, Form, BodyWrapper, Icon } from "../components";
 import { UserContext } from "../contexts/userContext";
 import { ToastContext } from "../contexts/toastContext";
 import firebase from "../firebase.js";
+import { metrics, icons } from "../themes";
+import BlockIcon from '@material-ui/icons/Block';
+import AvTimerIcon from '@material-ui/icons/AvTimer';
+import Badge from '@material-ui/core/Badge';
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+
 import "firebase/firestore";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+}));
 
 const SessionFeedback = () => {
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
-  const [interruptions, addInterruption] = useState(null);
+  const [interruptions, setInterruptions] = useState(0);
+  const [rude, setRude] = useState(0);
   const [moreInfoComplete, setMoreInfoComplete] = useState(false);
   const { userState, userDispatch } = useContext(UserContext);
   const { sendMessage } = useContext(ToastContext);
@@ -76,35 +97,51 @@ const SessionFeedback = () => {
     }
   };
 
-  const moreInfo = () => {
-    return (
-      <BodyWrapper>
-        <H1>Please login first</H1>
-      </BodyWrapper>
-    );
-  };
+  const feedbackPanel = () => {
+    const classes = useStyles();
 
-  const dashboard = () => {
     return (
       <BodyWrapper>
         <H1>Session Feedback</H1>
+        <div className={classes.root}>
+        <Grid
+          container
+          direction="row"
+          justify="center"
+          alignItems="center"
+          spacing={3}>
         <P>
-        <Form>
+        <Grid item xs={6}>
           <div>
-          <Button onClick={e => onClickSubmit(e)}>Interrupt</Button>
-          <Button onClick={e => onClickSubmit(e)}>Rude</Button>
-          <Button onClick={e => onClickSubmit(e)}>Axcious</Button>
+            <Badge badgeContent={interruptions} color="secondary">
+              <IconButton onClick={() => setInterruptions(interruptions + 1)}>
+                <BlockIcon style={{ fontSize: 200 }}/> 
+              </IconButton>
+            </Badge>
           </div>
+          </Grid>
 
-          <Button onClick={e => onClickSubmit(e)}>Submit</Button>
-        </Form>
+          <Grid item xs={6}>
+          <div>
+            <Badge badgeContent={rude} color="secondary">
+              <IconButton onClick={() => setRude(rude + 1)}>
+                <AvTimerIcon style={{ fontSize: 200 }}/>
+              </IconButton>
+            </Badge>
+          </div>
+          </Grid>
+          <Grid item xs={12}>
+          <div>
+            <Button onClick={() => setRude(rude + 1)}>Finish</Button>
+          </div>
+          </Grid>
         </P>
+        </Grid>
+        </div>
       </BodyWrapper>
     );
   };
-  return moreInfoComplete || userState.userData.firstName
-    ? dashboard()
-    : moreInfo();
+  return feedbackPanel()
 };
 
 export default SessionFeedback;

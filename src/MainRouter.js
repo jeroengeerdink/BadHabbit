@@ -138,7 +138,7 @@ const MainRouter = () => {
                   />
                   <Route
                     path={"/sessionfeedback"}
-                    render={() => routeWithAuth(<SessionFeedback />)}
+                    render={() => <SessionFeedback />}
                   />
                   <Route
                     path={"/profile"}

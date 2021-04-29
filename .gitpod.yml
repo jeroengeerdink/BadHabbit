@@ -6,11 +6,10 @@ ports:
     onOpen: open-preview
 tasks:
   - init: 
-      echo 'init script' echo "Getting dependencies..." 
-      & npm install
-      & cd functions
-      & npm install 
-      & firebase-functions@latest firebase-admin@latest --save 
-      & cd ..
-  - command:
+      npm install
+      cd functions
+      npm install
+      npm install firebase-functions@latest firebase-admin@latest --save 
+      cd ..
+    command:
       firebase login --no-localhost

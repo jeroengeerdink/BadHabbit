@@ -3,6 +3,9 @@ service cloud.firestore {
     match /{document=**} {
       allow read, write: if false;
     }
+    match /sessionfeedback/{uid} {
+      allow read, write: if request.resource.data.owner == request.auth.uid;
+    }
     match /users/{uid} {
       allow write: if request.resource.data.keys().hasOnly(['email']) || 
       request.resource.data.firstName is string

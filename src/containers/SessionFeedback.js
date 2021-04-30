@@ -30,6 +30,7 @@ const SessionFeedback = () => {
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
   const [interruptions, setInterruptions] = useState(0);
+  const timestamp = Date.now();
   const [rude, setRude] = useState(0);
   const [moreInfoComplete, setMoreInfoComplete] = useState(false);
   const { userState, userDispatch } = useContext(UserContext);
@@ -71,13 +72,12 @@ const SessionFeedback = () => {
   const closeSession = e => {
     /*e.preventDefault();*/
     if (interruptions && rude) {
-      db.collection("sessionfeedback")
-        .doc(firebase.auth().currentUser.uid)
+      db.collection("sessionfeedback").doc(firebase.auth().currentUser.uid + "" +timestamp)
         .set(
           {
-            user: firebase.auth().currentUser.uid,
-            interruptions: interruptions,
-            rude: rude
+            owner: firebase.auth().currentUser.uid,
+            numberOfInterruptions: interruptions,
+            numberOfrude: rude
           },
           { merge: true }
         );

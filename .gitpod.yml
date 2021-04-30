@@ -6,7 +6,5 @@ ports:
     onOpen: open-preview
 tasks:
   - init: npm install
-    command: cd functions
-    command: npm install
-    command: cd ..
+    command: cd functions && npm install && cd ..
     command: firebase login --no-localhost

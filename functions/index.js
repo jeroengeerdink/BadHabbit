@@ -3,7 +3,7 @@ const admin = require("firebase-admin");
 admin.initializeApp(functions.config().firebase);
 
 exports.sendPushNotification = functions.https.onCall((data, context) => {
-  var message = {
+  const message = {
     notification: {
       title: data.title,
       body: data.body

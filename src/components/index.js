@@ -15,6 +15,7 @@ import Hamburger from "./Hamburger";
 import Close from "./Close";
 import Switch from "./Switch";
 import Overlay from "./Overlay";
+import TimeDelayButton from "./TimeDelayButton";
 import { GoogleAuth, FacebookAuth } from "./SocialAuthButton";
 
 export {
@@ -36,5 +37,6 @@ export {
   GoogleAuth,
   FacebookAuth,
   BodyWrapper,
-  MobileMenuBar
+  MobileMenuBar,
+  TimeDelayButton
 };

@@ -27,7 +27,7 @@ const TimeDelayButton = props => {
   const [color, setColor] = useState("white");
   const [content, setContent] = useState(props.children);
   const [counter, setCounter] = useState(props.countdown);
-  const delay = useState(1000)
+  const delay = 1000
   const [isPlaying, setPlaying] = useState(false)
 
   useInterval(() => {

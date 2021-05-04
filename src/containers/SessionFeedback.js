@@ -96,7 +96,7 @@ const SessionFeedback = (props) => {
               <Badge badgeContent={rude} color="secondary" classes={{ badge: classes.badge }}>
                 <Card className={classes.root}>
                   <CardContent>
-                    <TimeDelayButton countdown={5} onClick={() => { setRude(rude + 1) }}>
+                    <TimeDelayButton countdown={10} onClick={() => { setRude(rude + 1) }}>
                       <PanToolIcon style={{ fontSize: 200 }} />
                     </TimeDelayButton>
                   </CardContent>

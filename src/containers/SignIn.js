@@ -3,7 +3,6 @@ import {
   P,
   H1,
   Button,
-  FacebookAuth,
   GoogleAuth,
   Input,
   Form,
@@ -40,7 +39,6 @@ const AuthSeparator = styled.div`
 `;
 
 const SignIn = () => {
-  const [facebookLoadState, setFacebookLoadState] = useState(false);
   const [googleLoadState, setGoogleLoadState] = useState(false);
   const [email, setEmail] = useState("");
   const { sendMessage } = useContext(ToastContext);
@@ -74,32 +72,6 @@ const SignIn = () => {
     }
   };
 
-  const authWithFacebook = () => {
-    setFacebookLoadState(true);
-    const facebookProvider = new firebase.auth.FacebookAuthProvider();
-    firebase
-      .auth()
-      .signInWithPopup(facebookProvider)
-      .then(result => {
-        if (result.additionalUserInfo.isNewUser) {
-          db.collection("users")
-            .doc(result.user.uid)
-            .set({
-              email: result.additionalUserInfo.profile.email
-            });
-        }
-      })
-      .catch(err => {
-        if (err.code === "auth/account-exists-with-different-credential") {
-          sendMessage(
-            "It looks like the email address associated with your Facebook account has already been used to sign in with another method. Please sign in using the original method you signed up with."
-          );
-        } else {
-          sendMessage(err.message);
-        }
-        setFacebookLoadState(false);
-      });
-  };
 
   const authWithGoogle = () => {
     setGoogleLoadState(true);
@@ -147,10 +119,7 @@ const SignIn = () => {
         <H1>Sign Up/Sign In</H1>
         <P>
           Signing in and signing up are the same process, and no password is
-          asked for...hopefully you don't mind! I believe that verification by
-          email is better for consumer trust in the era of so many data
-          breaches, and is arguably safer than a traditional authentication
-          setup.
+          asked for...hopefully you don't mind! 
         </P>
         <Form>
           <div>
@@ -170,11 +139,6 @@ const SignIn = () => {
         <AuthSeparator>
           <span>OR</span>
         </AuthSeparator>
-        <FacebookAuth
-          marginBottom
-          loading={facebookLoadState}
-          onClick={authWithFacebook}
-        />
         <GoogleAuth loading={googleLoadState} onClick={authWithGoogle} />
       </BodyWrapper>
     </>

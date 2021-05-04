@@ -162,16 +162,6 @@ const MenuOverlay = props => {
                 Profile
               </MenuItem>
             </CSSTransition>
-            <CSSTransition child={2} timeout={1000} classNames="fade">
-              <MenuItem
-                onClick={() => {
-                  window.location.href =
-                    "http://github.com/eemebarbe/react-firebase-essentials";
-                }}
-              >
-                Github
-              </MenuItem>
-            </CSSTransition>
             <CSSTransition child={3} timeout={1000} classNames="fade">
               <MenuItem onClick={signOut}>Sign out</MenuItem>
             </CSSTransition>

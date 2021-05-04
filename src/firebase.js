@@ -8,7 +8,6 @@ const config = {
   projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
   messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_ID,
   storageBucket: process.env.REACT_APP_FIREBASE_STORAGEBUCKET,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_ID,
   appId: process.env.REACT_APP_FIREBASE_APPID,
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENTID
 };

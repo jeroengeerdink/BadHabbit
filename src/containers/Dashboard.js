@@ -2,6 +2,10 @@ import React, { useState, useContext, useEffect } from "react";
 import { P, H1, Button, Input, Form, BodyWrapper } from "../components";
 import { UserContext } from "../contexts/userContext";
 import { ToastContext } from "../contexts/toastContext";
+import { makeStyles } from '@material-ui/core/styles';
+import {useHistory} from 'react-router-dom';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 import firebase from "../firebase.js";
 import "firebase/firestore";
 
@@ -12,6 +16,7 @@ const Dashboard = () => {
   const { userState, userDispatch } = useContext(UserContext);
   const { sendMessage } = useContext(ToastContext);
   const db = firebase.firestore();
+  const history = useHistory();
 
   useEffect(() => {
     if (
@@ -22,6 +27,14 @@ const Dashboard = () => {
       requestNotifications();
     }
   }, []);
+
+  const useStyles = makeStyles((theme) => ({
+    fab: {
+      position: 'absolute',
+      bottom: theme.spacing(2),
+      right: theme.spacing(2),
+    },
+  }));
 
   const requestNotifications = () => {
     Notification.requestPermission().then(permission => {
@@ -79,10 +92,7 @@ const Dashboard = () => {
       <BodyWrapper>
         <H1>Onboarding</H1>
         <P>
-          This is an introduction screen that shows up after the user
-          successfully logs in for the first time. It's a good opportunity to
-          collect additional information or provide them with important details
-          about how your application works.
+          Welcome to the Bad Habbit Tracker! To continuue please complete the small profile below.
         </P>
         <Form>
           <div>
@@ -107,53 +117,20 @@ const Dashboard = () => {
     );
   };
 
+
   const dashboard = () => {
+    const classes = useStyles();
+
     return (
       <BodyWrapper>
         <H1>Dashboard</H1>
         <P>
-          So this is your dashboard. Maybe you'll put a few graphs here, you've
-          always wanted to try out D3. Maybe a news feed, or updates on new
-          features.
+          To be completed with some nice graphs :)
+          Get started with the button below....
         </P>
-        <P>
-          So this is your dashboard. Maybe you'll put a few graphs here, you've
-          always wanted to try out D3. Maybe a news feed, or updates on new
-          features. So this is your dashboard. Maybe you'll put a few graphs
-          here, you've always wanted to try out D3. Maybe a news feed, or
-          updates on new features. So this is your dashboard. Maybe you'll put a
-          few graphs here, you've always wanted to try out D3. Maybe a news
-          feed, or updates on new features.
-        </P>
-        <P>
-          So this is your dashboard. Maybe you'll put a few graphs here, you've
-          always wanted to try out D3. Maybe a news feed, or updates on new
-          features.
-        </P>
-        <P>
-          So this is your dashboard. Maybe you'll put a few graphs here, you've
-          always wanted to try out D3. Maybe a news feed, or updates on new
-          features. So this is your dashboard. Maybe you'll put a few graphs
-          here, you've always wanted to try out D3. Maybe a news feed, or
-          updates on new features.
-        </P>
-        <P>
-          So this is your dashboard. Maybe you'll put a few graphs here, you've
-          always wanted to try out D3. Maybe a news feed, or updates on new
-          features.
-        </P>
-        <P>
-          So this is your dashboard. Maybe you'll put a few graphs here, you've
-          always wanted to try out D3. Maybe a news feed, or updates on new
-          features. So this is your dashboard. Maybe you'll put a few graphs
-          here, you've always wanted to try out D3. Maybe a news feed, or
-          updates on new features.
-        </P>
-        <P>
-          So this is your dashboard. Maybe you'll put a few graphs here, you've
-          always wanted to try out D3. Maybe a news feed, or updates on new
-          features.
-        </P>
+        <Fab color="primary" aria-label="add" className={classes.fab}>
+          <AddIcon onClick={() => {history.push('/sessionfeedback');}} ></AddIcon>
+        </Fab>
       </BodyWrapper>
     );
   };

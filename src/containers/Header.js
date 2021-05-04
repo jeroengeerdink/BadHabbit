@@ -77,7 +77,7 @@ const HeaderWithRouter = props => {
           <CompanyLogo
             onClick={() => (userId ? pushTo("/dashboard") : pushTo("/"))}
           >
-            React Firebase Essentials
+            Bad Habbit Tracker
           </CompanyLogo>
           {userId && menuButtonState()}
         </HeaderInner>

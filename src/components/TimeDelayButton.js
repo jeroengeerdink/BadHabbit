@@ -1,11 +1,7 @@
 
-import React, { useState, useContext, useEffect, useRef } from "react";
-import ReactDOM from "react-dom";
-import styled from "styled-components";
-import { metrics } from "../themes";
+import React, { useState, useEffect, useRef } from "react";
 import IconButton from '@material-ui/core/IconButton';
-import AvTimerIcon from '@material-ui/icons/AvTimer';
-import { makeStyles } from '@material-ui/core/styles';
+
 
 const useInterval = (callback, delay) => {
   const savedCallback = useRef();
@@ -27,46 +23,47 @@ const useInterval = (callback, delay) => {
   }, [delay]);
 }
 
-const TimeDelayButton = parameters => {
+const TimeDelayButton = props => {
   const [color, setColor] = useState("white");
-  const [props, setProps] = useState(parameters);
-  const [content, setContent] = useState(<AvTimerIcon style={{ fontSize: 200 }} />);
+  const [content, setContent] = useState(props.children);
   const [counter, setCounter] = useState(props.countdown);
-  const [delay, setDelay] = useState(1000)
+  const delay = useState(1000)
   const [isPlaying, setPlaying] = useState(false)
 
-  let intervalRef = useInterval(() => {
-    console.log("In loop > " + counter);
+  useInterval(() => {
     setCounter(counter - 1);
     setContent(displayText(counter));
-    if (counter == 0) {
-      console.log("zero");
+    if (counter === 1) {
+      setColor("green");
+    }
+    if (counter === 0) {
       setPlaying(false);
       setContent(displayText("GO"));
-      setColor("green");
       setTimeout(() => {
         setColor("white");
-        setContent(<AvTimerIcon style={{ fontSize: 200 }} />);
+        setContent(props.children);
+        setCounter(10);
       }, 5000);
     }
   }, isPlaying ? delay : null);
 
   const displayText = (text) => {
-    return <div style={{ fontSize: 150, width: 200, height: 200, texAlign: "center", verticalAlign: "middle" }} >{text}</div>;
+    return <div style={{
+      fontSize: 120, 
+      width: 200, 
+      height: 200, 
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center"
+    }} >{text}</div>;
   }
 
   const handleClick = (e) => {
     if (!isPlaying) {
-      console.log("start animation >" + props.countdown);
+      props.onClick(e);
       setColor("red");
-      //setCounter(props.countdown);
-      console.log("Counter > " + counter);
       setContent(displayText(counter));
       setPlaying(true);
-      props.onClick(e);
-    }
-    else {
-      // ignore
     }
   }
 

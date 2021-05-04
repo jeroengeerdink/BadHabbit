@@ -13,6 +13,7 @@ import Fab from '@material-ui/core/Fab';
 import CardContent from '@material-ui/core/CardContent';
 import { Overlay } from "../components";
 import {useHistory} from 'react-router-dom';
+import WakeLock from 'react-wakelock';
 
 import "firebase/firestore";
 
@@ -107,6 +108,7 @@ const SessionFeedback = (props) => {
             </Grid>
           </Grid>
         </div>
+        <WakeLock />
       </Overlay>
     );
   };

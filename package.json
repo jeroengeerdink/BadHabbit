@@ -12,6 +12,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "2.1.1",
     "react-transition-group": "^2.6.0",
+    "react-wakelock": "^0.0.4",
     "styled-components": "^4.1.3"
   },
   "scripts": {

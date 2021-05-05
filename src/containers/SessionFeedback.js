@@ -12,7 +12,7 @@ import Card from '@material-ui/core/Card';
 import Fab from '@material-ui/core/Fab';
 import CardContent from '@material-ui/core/CardContent';
 import { Overlay } from "../components";
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import "firebase/firestore";
 
@@ -40,27 +40,29 @@ const useStyles = makeStyles((theme) => ({
 const SessionFeedback = (props) => {
   const [interruptions, setInterruptions] = useState(0);
   const timestamp = Date.now();
-  const [rude, setRude] = useState(0);
+  const [intents, setIntents] = useState(0);
   const db = firebase.firestore();
   const history = useHistory();
 
   const closeSession = e => {
-    if (interruptions || rude) {
-      const endTime = Date.now();
-      console.log(endTime);
-      db.collection("sessionfeedback").doc(firebase.auth().currentUser.uid + "" + timestamp)
-        .set(
-          {
-            owner: firebase.auth().currentUser.uid,
-            numberOfInterruptions: interruptions,
-            numberOfrude: rude,
-            starttime: timestamp,
-            endtime: endTime,
-            duration: ((endTime - timestamp) / 1000)
-          },
-          { merge: true }
-        );
-    }
+    const endTime = Date.now();
+    const obj = {
+      owner: firebase.auth().currentUser.uid,
+      numberOfInterruptions: interruptions,
+      numberOfIntentToTalk: intents,
+      starttime: timestamp,
+      endtime: endTime,
+      duration: Math.round((((endTime - timestamp) % 86400000) % 3600000) / 60000)
+    };
+    console.log(obj);
+    console.log(interruptions);
+    console.log(intents);
+    db.collection("sessionfeedback")
+      .doc(firebase.auth().currentUser.uid + "" + timestamp)
+      .set(
+        obj,
+        { merge: true }
+      );
     history.push('/dashboard');
   };
 
@@ -70,18 +72,17 @@ const SessionFeedback = (props) => {
 
     return (
       <Overlay>
-          <Fab color="primary" aria-label="add" className={classes.fab}>
-            <ExitToAppIcon onClick={() => closeSession()}></ExitToAppIcon>
-          </Fab>
+        <Fab color="primary" aria-label="add" className={classes.fab}>
+          <ExitToAppIcon onClick={() => closeSession()}></ExitToAppIcon>
+        </Fab>
         <div className={classes.root}>
           <Grid
             container
             direction="row"
-            justify="center"
             alignItems="center"
             style={{ textAlign: "center" }}
-            spacing={12}>
-            <Grid item justify="center" alignItems="center" xs>
+            spacing={1}>
+            <Grid item  xs>
               <Badge badgeContent={interruptions} color="secondary" classes={{ badge: classes.badge }}>
                 <Card className={classes.root}>
                   <CardContent>
@@ -92,18 +93,18 @@ const SessionFeedback = (props) => {
                 </Card>
               </Badge>
             </Grid>
-            <Grid item justify="center" alignItems="center" xs>
-              <Badge badgeContent={rude} color="secondary" classes={{ badge: classes.badge }}>
+            <Grid item  xs>
+              <Badge badgeContent={intents} color="secondary" classes={{ badge: classes.badge }}>
                 <Card className={classes.root}>
                   <CardContent>
-                    <TimeDelayButton countdown={10} onClick={() => { setRude(rude + 1) }}>
+                    <TimeDelayButton countdown={10} onClick={() => { setIntents(intents + 1) }}>
                       <PanToolIcon style={{ fontSize: 200 }} />
                     </TimeDelayButton>
                   </CardContent>
                 </Card>
               </Badge>
             </Grid>
-            <Grid item xs={12} justify="center" alignItems="center">
+            <Grid item xs={12}>
             </Grid>
           </Grid>
         </div>

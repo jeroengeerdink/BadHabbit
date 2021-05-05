@@ -49,9 +49,9 @@ const TimeDelayButton = props => {
 
   const displayText = (text) => {
     return <div style={{
-      fontSize: 120, 
-      width: 200, 
-      height: 200, 
+      fontSize: 120,
+      width: 200,
+      height: 200,
       display: "flex",
       justifyContent: "center",
       alignItems: "center"
